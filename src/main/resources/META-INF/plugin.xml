@@ -1,18 +1,20 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>com.github.linwancen.findauthor</id>
-    <name>IntelliJ Platform Plugin find-author</name>
-    <vendor>linwancen</vendor>
+    <id>com.github.linwancen.plugin.author</id>
+    <name>Find Author</name>
+    <vendor email="1498425439@qq.com" url="https://github.com/LinWanCen/find-author">林万程</vendor>
 
     <depends>com.intellij.modules.platform</depends>
+    <depends>Git4Idea</depends>
+    <depends optional="true" config-file="java.xml">com.intellij.modules.java</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.linwancen.findauthor.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.github.linwancen.findauthor.services.MyProjectService"/>
+        <projectService serviceImplementation="com.github.linwancen.plugin.author.settings.IgnoreState"/>
+        <projectService serviceImplementation="com.github.linwancen.plugin.author.settings.InputState"/>
+        <applicationService serviceImplementation="com.github.linwancen.plugin.author.settings.OptionState"/>
+        <!-- https://jetbrains.design/intellij/resources/icons_list/ -->
+        <toolWindow id="Author" secondary="false" icon="AllIcons.General.User" anchor="right"
+                    factoryClass="com.github.linwancen.plugin.author.ui.AuthorWindowFactory"/>
     </extensions>
 
-    <applicationListeners>
-        <listener class="com.github.linwancen.findauthor.listeners.MyProjectManagerListener"
-                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
-    </applicationListeners>
 </idea-plugin>

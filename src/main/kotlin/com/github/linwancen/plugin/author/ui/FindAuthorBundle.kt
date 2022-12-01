@@ -1,13 +1,13 @@
-package com.github.linwancen.findauthor
+package com.github.linwancen.plugin.author.ui
 
 import com.intellij.DynamicBundle
 import org.jetbrains.annotations.NonNls
 import org.jetbrains.annotations.PropertyKey
 
 @NonNls
-private const val BUNDLE = "messages.MyBundle"
+private const val BUNDLE = "messages.FindAuthorBundle"
 
-object MyBundle : DynamicBundle(BUNDLE) {
+object FindAuthorBundle : DynamicBundle(BUNDLE) {
 
     @Suppress("SpreadOperator")
     @JvmStatic
