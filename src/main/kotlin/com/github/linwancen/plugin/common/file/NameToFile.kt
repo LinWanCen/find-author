@@ -2,31 +2,28 @@ package com.github.linwancen.plugin.common.file
 
 import com.intellij.openapi.project.DumbService
 import com.intellij.openapi.project.Project
-import com.intellij.psi.PsiFile
+import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.search.FilenameIndex
 import com.intellij.psi.search.GlobalSearchScope
 
 object NameToFile {
 
     @JvmStatic
-    fun file(
+    fun files(
         fileName: String,
+        fileEndList: List<String>,
         searchScope: GlobalSearchScope,
-        project: Project
-    ): PsiFile? {
-        var result: PsiFile? = null
+        project: Project,
+    ): Collection<VirtualFile> {
+        var files: Collection<VirtualFile> = emptyList()
         DumbService.getInstance(project).runReadActionInSmartMode {
-            if (!fileName.startsWith("package-info")) {
-                for (psiFile in FilenameIndex.getFilesByName(project, fileName, searchScope)) {
-                    result = psiFile
-                    return@runReadActionInSmartMode
-                }
-                for (psiFile in FilenameIndex.getFilesByName(project, "$fileName.java", searchScope)) {
-                    result = psiFile
+            for (fileEnd in fileEndList) {
+                files = FilenameIndex.getVirtualFilesByName(project, "$fileName$fileEnd", searchScope)
+                if (files.isNotEmpty()) {
                     return@runReadActionInSmartMode
                 }
             }
         }
-        return result
+        return files
     }
 }

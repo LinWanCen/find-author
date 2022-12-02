@@ -14,6 +14,15 @@ import com.intellij.util.xmlb.XmlSerializerUtil
 )
 class OptionState : PersistentStateComponent<OptionState?> {
     var format = GitLog.DEFAULT_FORMAT
+    var fileEnds = "|.java"
+        set(value) {
+            field = value
+            fileEndList = value.trim().split("|").map(String::trim)
+            if (fileEndList.isEmpty()) {
+                fileEndList = listOf("")
+            }
+        }
+    var fileEndList = emptyList<String>()
 
     override fun getState(): OptionState {
         return this

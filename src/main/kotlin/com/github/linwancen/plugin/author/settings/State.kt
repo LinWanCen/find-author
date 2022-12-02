@@ -7,5 +7,5 @@ data class State(val project : Project) {
     val ignore = IgnoreState.of(project)
     val input = InputState.of(project)
     val option = OptionState.of()
-    val allScope = GlobalSearchScope.allScope(project)
+    val projectScope = GlobalSearchScope.projectScope(project)
 }

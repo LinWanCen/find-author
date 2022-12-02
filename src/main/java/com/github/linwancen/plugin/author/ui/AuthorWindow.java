@@ -51,6 +51,7 @@ public class AuthorWindow {
             optionState.setFormat(format.getText());
             formatDemo.setText(GitLog.demo(project, format.getText()));
         });
+        UiUtils.onChange(fileEnds, optionState.getFileEnds(), e -> formatDemo.setText(optionState.getFileEnds()));
         // endregion option
     }
 
@@ -80,5 +81,6 @@ public class AuthorWindow {
     private JButton resetFormat;
     JTextField format;
     private JTextField formatDemo;
+    private JTextField fileEnds;
     // endregion option
 }

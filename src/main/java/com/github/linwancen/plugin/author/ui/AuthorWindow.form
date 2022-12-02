@@ -58,6 +58,7 @@
               <component id="78567" class="javax.swing.JTextArea" binding="output">
                 <constraints/>
                 <properties>
+                  <editable value="false"/>
                   <font swing-font="TextField.font"/>
                 </properties>
               </component>
@@ -141,7 +142,7 @@
               </grid>
             </children>
           </grid>
-          <grid id="81172" layout-manager="GridLayoutManager" row-count="4" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="81172" layout-manager="GridLayoutManager" row-count="5" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <tabbedpane title-resource-bundle="messages/FindAuthorBundle" title-key="option"/>
@@ -180,7 +181,7 @@
               </component>
               <scrollpane id="8a0c">
                 <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="4" vsize-policy="1" hsize-policy="7" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="0" row-span="1" col-span="4" vsize-policy="3" hsize-policy="7" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <verticalScrollBarPolicy value="21"/>
@@ -195,7 +196,7 @@
               </scrollpane>
               <scrollpane id="830ea">
                 <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="4" vsize-policy="1" hsize-policy="7" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="2" column="0" row-span="1" col-span="4" vsize-policy="3" hsize-policy="7" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <verticalScrollBarPolicy value="21"/>
@@ -204,15 +205,30 @@
                 <children>
                   <component id="6768e" class="javax.swing.JTextField" binding="formatDemo">
                     <constraints/>
-                    <properties/>
+                    <properties>
+                      <editable value="false"/>
+                    </properties>
                   </component>
                 </children>
               </scrollpane>
               <vspacer id="83da7">
                 <constraints>
-                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
                 </constraints>
               </vspacer>
+              <scrollpane id="d22cf">
+                <constraints>
+                  <grid row="3" column="0" row-span="1" col-span="4" vsize-policy="3" hsize-policy="7" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+                <border type="none" title-resource-bundle="messages/FindAuthorBundle" title-key="file-ends"/>
+                <children>
+                  <component id="547e" class="javax.swing.JTextField" binding="fileEnds">
+                    <constraints/>
+                    <properties/>
+                  </component>
+                </children>
+              </scrollpane>
             </children>
           </grid>
         </children>

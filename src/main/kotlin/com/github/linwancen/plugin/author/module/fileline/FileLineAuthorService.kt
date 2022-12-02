@@ -13,8 +13,8 @@ object FileLineAuthorService {
         format: String
     ): String {
         val project = gitInfo.project
-        val scope = gitInfo.state.allScope
-        val fileLine = FileLine(line, project, scope)
+        val scope = gitInfo.state.projectScope
+        val fileLine = FileLine(line, gitInfo.state.option.fileEndList, project, scope)
         var result = if (fileLine.lineNum != "0") {
             GitBlame.info(gitInfo, format, fileLine.filePath, fileLine.lineNum)
         } else {
