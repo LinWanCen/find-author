@@ -5,63 +5,32 @@ import com.github.linwancen.plugin.author.module.fileline.FileLineAuthorService
 import com.github.linwancen.plugin.common.TaskTool
 import com.intellij.openapi.progress.ProgressIndicator
 import com.intellij.openapi.progress.Task
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.launch
-import java.util.concurrent.ConcurrentHashMap
-import java.util.concurrent.CountDownLatch
 
 object FileLineAuthorController {
     @JvmStatic
     fun getAuthor(
-        authorWindow: AuthorWindow
+        authorWindow: AuthorWindow,
     ) {
         if (authorWindow.input == null) {
             return
         }
         val project = authorWindow.project
-        authorWindow.gitAuthor.isEnabled = false
-        authorWindow.output.text = ""
-        authorWindow.tab.selectedComponent = authorWindow.outTab
+        authorWindow.beforeRun()
         val lines = authorWindow.input.text.split("\n")
         object : Task.Backgroundable(project, "Find author ${TaskTool.time()}") {
             override fun run(indicator: ProgressIndicator) {
                 try {
-                    val map = ConcurrentHashMap<Int, Channel<String>>()
-                    val latch = CountDownLatch(lines.size)
-                    val taskTool = TaskTool(indicator, lines.size)
-                    for (index in lines.indices) {
-                        map[index] = Channel()
-                    }
                     // In this for change new git version
                     val gitInfo = GitInfo(project)
-                    GlobalScope.launch {
-                        for ((index, line) in lines.withIndex()) {
-                            try {
-                                authorWindow.output.text += map[index]?.receive()
-                                taskTool.beforeNext(index, line)
-                            } finally {
-                                latch.countDown()
-                            }
+                    Output.output(indicator, authorWindow, lines,
+                        { line: String -> line },
+                        { line: String ->
+                            if (line.isBlank()) "\n"
+                            else FileLineAuthorService.outLine(gitInfo, line, authorWindow.gitFormat.text) + "\n"
                         }
-                    }
-                    for ((index, line) in lines.withIndex()) {
-                        if (indicator.isCanceled) {
-                            return
-                        }
-                        GlobalScope.launch {
-                            val result = if (line.isBlank() || indicator.isCanceled) {
-                                "\n"
-                            } else {
-                                FileLineAuthorService.outLine(gitInfo, line, authorWindow.format.text) + "\n"
-                            }
-                            map[index]?.send(result)
-                            map[index]?.close()
-                        }
-                    }
-                    latch.await()
+                    )
                 } finally {
-                    authorWindow.gitAuthor.isEnabled = true
+                    authorWindow.finallyForRun()
                 }
             }
         }.queue()

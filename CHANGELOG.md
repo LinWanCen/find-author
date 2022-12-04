@@ -4,6 +4,7 @@
 
 ## [1.0.0]
 
+- 1.04 export find window as tsv table with authors
 - 1.03 Option for file ext, default not skip or .java
 - 1.02 Filter by <kbd>leave-user</kbd>, <kbd>msg key word</kbd>, <kbd>Rev ID</kbd>
 - 1.01 Pretty format for "file log" and "line blame"
@@ -11,6 +12,7 @@
 
 # 中文更新日志
 
+- 1.04 以带作者的表格形式导出搜索窗口
 - 1.03 支持自定义省略的文件末尾拓展名，默认不省略或.java
 - 1.02 过滤 <kbd>离职用户</kbd>、<kbd>信息关键字</kbd>、<kbd>参考ID</kbd>
 - 1.01 格式化兼容 “文件 log” 与 “行 blame”

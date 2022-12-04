@@ -4,27 +4,29 @@ import com.github.linwancen.plugin.author.git.GitBlame
 import com.github.linwancen.plugin.author.git.GitInfo
 import com.github.linwancen.plugin.author.git.GitLog
 import com.github.linwancen.plugin.common.file.FileLine
+import com.github.linwancen.plugin.common.text.Formats
 
 object FileLineAuthorService {
     @JvmStatic
     fun outLine(
         gitInfo: GitInfo,
-        line: String,
+        lineStr: String,
         format: String
     ): String {
         val project = gitInfo.project
         val scope = gitInfo.state.projectScope
-        val fileLine = FileLine(line, gitInfo.state.option.fileEndList, project, scope)
-        var result = if (fileLine.lineNum != "0") {
+        val fileLine = FileLine(lineStr, gitInfo.state.option.fileEndList, project, scope)
+        val result = if (fileLine.lineNum != "0") {
             GitBlame.info(gitInfo, format, fileLine.filePath, fileLine.lineNum)
         } else {
             GitLog.info(gitInfo, format, fileLine.filePath)
         }
-        result = result.replace("\$fileNum", fileLine.fileNum)
-        result = result.replace("\$filePath", fileLine.filePath)
-        result = result.replace("\$fileName", fileLine.fileName)
-        result = result.replace("\$lineNum", fileLine.lineNum)
-        result = result.replace(GitLog.FORMAT_KEY, "")
-        return result.trim()
+        val paramMap = mapOf(
+            "fileNum" to fileLine.fileNum,
+            "filePath" to fileLine.filePath,
+            "fileName" to fileLine.fileName,
+            "lineNum" to fileLine.lineNum
+        )
+        return Formats.text(result, paramMap).trim()
     }
 }

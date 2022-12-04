@@ -8,14 +8,19 @@
 
 <!-- Plugin description -->
 - Find authors of multiple files or lines from Git
-- export find window as tsv table with authors (TODO)
+- Export find window as tsv table with authors
 - Find authors from comment (TODO)
 
 ## How to Use
 
 1. Open Author ToolWindow at Right
 2. Paste file:lineNum in <kbd>input</kbd>
-3. click <kbd>Git Author</kbd>
+3. Click <kbd>Git Author</kbd>
+
+Export Find:
+1. <kbd>Ctrl + Shift + F</kbd> / select a element <kbd>Alt + F7</kbd>
+2. Click <kbd>Open in the Find Window</kbd>
+3. Right-click the Find Window, select<kbd>@ Export Tsv + Git Author</kbd>
 
 ### input
 file support: fileName/filePath/classSimpleName
@@ -31,7 +36,7 @@ xxx(file:lineNum)
 # 中文说明
 
 - 从 Git 中查找多个文件或行的作者
-- 以带作者的表格形式导出搜索窗口（未完成）
+- 以带作者的表格形式导出搜索窗口
 - 从注释获取作者（未完成）
 
 ## 用法
@@ -39,6 +44,11 @@ xxx(file:lineNum)
 1. 右边的打开<kbd>Author</kbd>工具栏
 2. 粘贴 文件:行号 到 <kbd>输入</kbd>
 3. 点击 <kbd>Git 作者</kbd>
+
+导出搜索：
+1. <kbd>Ctrl + Shift + F</kbd> / select a element <kbd>Alt + F7</kbd>
+2. 单击<kbd>打开查找窗口</kbd>
+3. 右键单击查找窗口，选择<kbd>导出 tsv + Git 作者</kbd>
 
 ### 输入
 文件 支持：文件名/文件路径/类简称

@@ -17,4 +17,12 @@
                     factoryClass="com.github.linwancen.plugin.author.ui.AuthorWindowFactory"/>
     </extensions>
 
+    <actions>
+        <action id="ExportToTsvFile"
+                icon="AllIcons.ToolbarDecorator.Export"
+                text="@ Export Tsv + Git Author"
+                class="com.github.linwancen.plugin.author.action.ExportToTsvFile">
+            <add-to-group group-id="UsageView.Popup"/>
+        </action>
+    </actions>
 </idea-plugin>

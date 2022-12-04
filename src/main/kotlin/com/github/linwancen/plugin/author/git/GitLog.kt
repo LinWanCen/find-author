@@ -9,7 +9,6 @@ import git4idea.commands.GitLineHandler
 
 object GitLog {
 
-    const val DEFAULT_FORMAT = "\$fileNum.(\$fileName:\$lineNum)\t%an\t%ci\t%h\t%s"
     val FORMAT_KEY = Regex("%\\w+")
 
     /**

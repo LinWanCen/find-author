@@ -30,29 +30,46 @@ public class AuthorWindow {
         // leave user and ignore msg/rev
         InputState inputState = state.getInput();
         IgnoreState ignoreState = state.getIgnore();
-        UiUtils.onChange(input, inputState.getInput(), e -> inputState.setInput(input.getText()));
-        UiUtils.onChange(leaveUser, ignoreState.getUser(), e -> ignoreState.setUser(leaveUser.getText()));
-        UiUtils.onChange(ignoreMsg, ignoreState.getMsg(), e -> ignoreState.setMsg(ignoreMsg.getText()));
-        UiUtils.onChange(ignoreRev, ignoreState.getRev(), e -> ignoreState.setRev(ignoreRev.getText()));
+        UiUtils.onChange(input, inputState.getInput(), (e, s) -> inputState.setInput(s));
+        UiUtils.onChange(leaveUser, ignoreState.getUser(), (e, s) -> ignoreState.setUser(s));
+        UiUtils.onChange(ignoreMsg, ignoreState.getMsg(), (e, s) -> ignoreState.setMsg(s));
+        UiUtils.onChange(ignoreRev, ignoreState.getRev(), (e, s) -> ignoreState.setRev(s));
         toRev.addActionListener(e -> ignoreRev.setText(GitLog.revs(project)));
 
         // region option
         OptionState optionState = state.getOption();
-        resetFormat.addActionListener(e -> format.setText(GitLog.DEFAULT_FORMAT));
+        UiUtils.onChange(fileEnds, optionState.getFileEnds(), (e, s) -> optionState.setFileEnds(s));
+
         logHelp.addActionListener(e -> GitRepos.run(project, GitCommand.LOG, "--help"));
         blameHelp.addActionListener(e -> GitRepos.run(project, GitCommand.BLAME, "--help"));
-        format.addFocusListener(new FocusAdapter() {
+
+        resetGitFormat.addActionListener(e -> gitFormat.setText(OptionState.GIT_FORMAT));
+        gitFormat.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                formatDemo.setText(GitLog.demo(project, format.getText()));
+                gitFormatDemo.setText(GitLog.demo(project, gitFormat.getText()));
             }
         });
-        UiUtils.onChange(format, optionState.getFormat(), e -> {
-            optionState.setFormat(format.getText());
-            formatDemo.setText(GitLog.demo(project, format.getText()));
+        UiUtils.onChange(gitFormat, optionState.getGitFormat(), (e, s) -> {
+            optionState.setGitFormat(s);
+            gitFormatDemo.setText(GitLog.demo(project, s));
         });
-        UiUtils.onChange(fileEnds, optionState.getFileEnds(), e -> formatDemo.setText(optionState.getFileEnds()));
+
+        resetFindFormat.addActionListener(e -> findFormat.setText(OptionState.FIND_FORMAT));
+        UiUtils.onChange(findFormat, optionState.getFindFormat(), (e, s) -> optionState.setFindFormat(s));
+        findParams.setText(OptionState.getParams());
         // endregion option
+    }
+
+    public void beforeRun() {
+        gitAuthor.setEnabled(false);
+        output.setText("");
+        tab.setSelectedComponent(outTab);
+        toolWindow.show();
+    }
+
+    public void finallyForRun() {
+        gitAuthor.setEnabled(true);
     }
 
     JPanel mainPanel;
@@ -76,11 +93,17 @@ public class AuthorWindow {
     // endregion ignore
 
     // region option
+    private JTextArea fileEnds;
+
     private JButton logHelp;
     private JButton blameHelp;
-    private JButton resetFormat;
-    JTextField format;
-    private JTextField formatDemo;
-    private JTextField fileEnds;
+
+    private JButton resetGitFormat;
+    JTextArea gitFormat;
+    private JTextArea gitFormatDemo;
+
+    private JButton resetFindFormat;
+    private JTextArea findFormat;
+    private JTextArea findParams;
     // endregion option
 }

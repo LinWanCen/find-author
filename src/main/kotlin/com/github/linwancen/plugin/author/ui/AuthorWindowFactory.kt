@@ -6,8 +6,12 @@ import com.intellij.openapi.wm.ToolWindowFactory
 import com.intellij.ui.content.ContentFactory
 
 class AuthorWindowFactory : ToolWindowFactory {
+    companion object{
+       val winMap = mutableMapOf<Project, AuthorWindow>()
+    }
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
         val authorWindow = AuthorWindow(project, toolWindow)
+        winMap[project] = authorWindow
         val contentFactory = ContentFactory.SERVICE.getInstance()
         val content = contentFactory.createContent(authorWindow.mainPanel, "", false)
         toolWindow.contentManager.addContent(content)

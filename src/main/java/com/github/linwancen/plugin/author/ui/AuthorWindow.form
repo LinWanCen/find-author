@@ -1,29 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.github.linwancen.plugin.author.ui.AuthorWindow">
-  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="500" height="400"/>
+      <xy x="20" y="20" width="500" height="455"/>
     </constraints>
     <properties/>
     <border type="none"/>
     <children>
       <component id="9dfde" class="javax.swing.JButton" binding="gitAuthor">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text resource-bundle="messages/FindAuthorBundle" key="git-author"/>
         </properties>
       </component>
-      <hspacer id="21f23">
-        <constraints>
-          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </hspacer>
       <tabbedpane id="c43c3" binding="tab">
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="200" height="200"/>
           </grid>
         </constraints>
@@ -142,95 +137,132 @@
               </grid>
             </children>
           </grid>
-          <grid id="81172" layout-manager="GridLayoutManager" row-count="5" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-            <margin top="0" left="0" bottom="0" right="0"/>
+          <scrollpane id="25716">
             <constraints>
               <tabbedpane title-resource-bundle="messages/FindAuthorBundle" title-key="option"/>
             </constraints>
             <properties/>
             <border type="none"/>
             <children>
-              <component id="dfc39" class="javax.swing.JButton" binding="logHelp">
-                <constraints>
-                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text resource-bundle="messages/FindAuthorBundle" key="git-log-help"/>
-                </properties>
-              </component>
-              <component id="3805e" class="javax.swing.JButton" binding="blameHelp">
-                <constraints>
-                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text resource-bundle="messages/FindAuthorBundle" key="git-blame-help"/>
-                </properties>
-              </component>
-              <hspacer id="e1ac9">
-                <constraints>
-                  <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-              </hspacer>
-              <component id="c2b83" class="javax.swing.JButton" binding="resetFormat">
-                <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text resource-bundle="messages/FindAuthorBundle" key="reset-format"/>
-                </properties>
-              </component>
-              <scrollpane id="8a0c">
-                <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="4" vsize-policy="3" hsize-policy="7" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <verticalScrollBarPolicy value="21"/>
-                </properties>
-                <border type="none" title-resource-bundle="messages/FindAuthorBundle" title-key="git-log-format"/>
+              <grid id="81172" layout-manager="GridLayoutManager" row-count="8" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints/>
+                <properties/>
+                <border type="none"/>
                 <children>
-                  <component id="879d1" class="javax.swing.JTextField" binding="format">
-                    <constraints/>
+                  <scrollpane id="d22cf">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="4" vsize-policy="3" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
                     <properties/>
-                  </component>
-                </children>
-              </scrollpane>
-              <scrollpane id="830ea">
-                <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="4" vsize-policy="3" hsize-policy="7" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <verticalScrollBarPolicy value="21"/>
-                </properties>
-                <border type="none" title-resource-bundle="messages/FindAuthorBundle" title-key="git-log-format-demo"/>
-                <children>
-                  <component id="6768e" class="javax.swing.JTextField" binding="formatDemo">
-                    <constraints/>
+                    <border type="none" title-resource-bundle="messages/FindAuthorBundle" title-key="file-ends"/>
+                    <children>
+                      <component id="df25e" class="javax.swing.JTextArea" binding="fileEnds">
+                        <constraints/>
+                        <properties/>
+                      </component>
+                    </children>
+                  </scrollpane>
+                  <component id="dfc39" class="javax.swing.JButton" binding="logHelp">
+                    <constraints>
+                      <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
                     <properties>
-                      <editable value="false"/>
+                      <text resource-bundle="messages/FindAuthorBundle" key="git-log-help"/>
                     </properties>
                   </component>
-                </children>
-              </scrollpane>
-              <vspacer id="83da7">
-                <constraints>
-                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-                </constraints>
-              </vspacer>
-              <scrollpane id="d22cf">
-                <constraints>
-                  <grid row="3" column="0" row-span="1" col-span="4" vsize-policy="3" hsize-policy="7" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties/>
-                <border type="none" title-resource-bundle="messages/FindAuthorBundle" title-key="file-ends"/>
-                <children>
-                  <component id="547e" class="javax.swing.JTextField" binding="fileEnds">
-                    <constraints/>
-                    <properties/>
+                  <component id="3805e" class="javax.swing.JButton" binding="blameHelp">
+                    <constraints>
+                      <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text resource-bundle="messages/FindAuthorBundle" key="git-blame-help"/>
+                    </properties>
                   </component>
+                  <component id="c2b83" class="javax.swing.JButton" binding="resetGitFormat">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text resource-bundle="messages/FindAuthorBundle" key="reset-git-format"/>
+                    </properties>
+                  </component>
+                  <scrollpane id="8a0c">
+                    <constraints>
+                      <grid row="2" column="0" row-span="1" col-span="4" vsize-policy="3" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties/>
+                    <border type="none" title-resource-bundle="messages/FindAuthorBundle" title-key="git-log-format"/>
+                    <children>
+                      <component id="57321" class="javax.swing.JTextArea" binding="gitFormat">
+                        <constraints/>
+                        <properties/>
+                      </component>
+                    </children>
+                  </scrollpane>
+                  <scrollpane id="830ea">
+                    <constraints>
+                      <grid row="3" column="0" row-span="1" col-span="4" vsize-policy="3" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties/>
+                    <border type="none" title-resource-bundle="messages/FindAuthorBundle" title-key="git-log-format-demo"/>
+                    <children>
+                      <component id="42be4" class="javax.swing.JTextArea" binding="gitFormatDemo">
+                        <constraints/>
+                        <properties>
+                          <editable value="false"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </scrollpane>
+                  <component id="b5c5a" class="javax.swing.JButton" binding="resetFindFormat">
+                    <constraints>
+                      <grid row="4" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text resource-bundle="messages/FindAuthorBundle" key="reset-export-find-format"/>
+                    </properties>
+                  </component>
+                  <scrollpane id="3348b">
+                    <constraints>
+                      <grid row="5" column="0" row-span="1" col-span="4" vsize-policy="3" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties/>
+                    <border type="none" title-resource-bundle="messages/FindAuthorBundle" title-key="export-find-format"/>
+                    <children>
+                      <component id="4e474" class="javax.swing.JTextArea" binding="findFormat">
+                        <constraints/>
+                        <properties/>
+                      </component>
+                    </children>
+                  </scrollpane>
+                  <scrollpane id="2dcd1">
+                    <constraints>
+                      <grid row="6" column="0" row-span="1" col-span="4" vsize-policy="3" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties/>
+                    <border type="none" title-resource-bundle="messages/FindAuthorBundle" title-key="export-find-format-params"/>
+                    <children>
+                      <component id="f46a0" class="javax.swing.JTextArea" binding="findParams">
+                        <constraints/>
+                        <properties/>
+                      </component>
+                    </children>
+                  </scrollpane>
+                  <vspacer id="b707a">
+                    <constraints>
+                      <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                  </vspacer>
+                  <hspacer id="ad70a">
+                    <constraints>
+                      <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                  </hspacer>
                 </children>
-              </scrollpane>
+              </grid>
             </children>
-          </grid>
+          </scrollpane>
         </children>
       </tabbedpane>
     </children>
