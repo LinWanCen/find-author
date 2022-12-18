@@ -61,11 +61,16 @@ public class AuthorWindow {
         // endregion option
     }
 
-    public void beforeRun() {
+    public boolean beforeRun() {
+        tab.setSelectedComponent(outTab);
+        // for before 201.6668.113
+        toolWindow.activate(null);
+        if (!gitAuthor.isEnabled()) {
+            return true;
+        }
         gitAuthor.setEnabled(false);
         output.setText("");
-        tab.setSelectedComponent(outTab);
-        toolWindow.show();
+        return false;
     }
 
     public void finallyForRun() {

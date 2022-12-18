@@ -13,7 +13,7 @@ class FormatsTest {
     fun text() {
         val map = mapOf(
             "k1" to "v1",
-            "k2" to "v2",
+            "k2" to "v2"
         )
         assertEquals("v1", Formats.text("\${k1}", map))
         assertEquals("<v1", Formats.text("<\${k1}", map))

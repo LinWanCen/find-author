@@ -1,2 +1,5 @@
 <idea-plugin>
+  <extensions defaultExtensionNs="com.intellij">
+    <applicationService serviceImplementation="com.github.linwancen.plugin.author.comment.JavaDataService" preload="true"/>
+  </extensions>
 </idea-plugin>

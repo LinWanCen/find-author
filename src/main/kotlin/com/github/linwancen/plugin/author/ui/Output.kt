@@ -13,27 +13,27 @@ object Output {
     fun <I, T : Collection<I>> output(
         indicator: ProgressIndicator,
         authorWindow: AuthorWindow,
-        lines: T,
+        items: T,
         toText2: (I) -> String,
-        toLineStr: (I) -> String,
+        toLineStr: (I) -> String
     ): Boolean {
         val map = ConcurrentHashMap<Int, Channel<String>>()
-        val latch = CountDownLatch(lines.size)
-        val taskTool = TaskTool(indicator, lines.size)
-        for (index in lines.indices) {
+        val latch = CountDownLatch(items.size)
+        val taskTool = TaskTool(indicator, items.size)
+        for (index in items.indices) {
             map[index] = Channel()
         }
         GlobalScope.launch {
-            for ((index, line) in lines.withIndex()) {
+            for ((index, item) in items.withIndex()) {
                 try {
                     authorWindow.output.text += map[index]?.receive()
-                    taskTool.beforeNext(index, toText2.invoke(line))
+                    taskTool.beforeNext(index, toText2.invoke(item))
                 } finally {
                     latch.countDown()
                 }
             }
         }
-        for ((index, line) in lines.withIndex()) {
+        for ((index, line) in items.withIndex()) {
             if (indicator.isCanceled) {
                 return false
             }

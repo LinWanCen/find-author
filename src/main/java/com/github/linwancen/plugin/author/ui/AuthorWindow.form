@@ -154,7 +154,10 @@
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="4" vsize-policy="3" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                     </constraints>
-                    <properties/>
+                    <properties>
+                      <horizontalScrollBarPolicy value="31"/>
+                      <verticalScrollBarPolicy value="21"/>
+                    </properties>
                     <border type="none" title-resource-bundle="messages/FindAuthorBundle" title-key="file-ends"/>
                     <children>
                       <component id="df25e" class="javax.swing.JTextArea" binding="fileEnds">
@@ -191,7 +194,10 @@
                     <constraints>
                       <grid row="2" column="0" row-span="1" col-span="4" vsize-policy="3" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                     </constraints>
-                    <properties/>
+                    <properties>
+                      <horizontalScrollBarPolicy value="31"/>
+                      <verticalScrollBarPolicy value="21"/>
+                    </properties>
                     <border type="none" title-resource-bundle="messages/FindAuthorBundle" title-key="git-log-format"/>
                     <children>
                       <component id="57321" class="javax.swing.JTextArea" binding="gitFormat">
@@ -204,7 +210,10 @@
                     <constraints>
                       <grid row="3" column="0" row-span="1" col-span="4" vsize-policy="3" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                     </constraints>
-                    <properties/>
+                    <properties>
+                      <horizontalScrollBarPolicy value="31"/>
+                      <verticalScrollBarPolicy value="21"/>
+                    </properties>
                     <border type="none" title-resource-bundle="messages/FindAuthorBundle" title-key="git-log-format-demo"/>
                     <children>
                       <component id="42be4" class="javax.swing.JTextArea" binding="gitFormatDemo">
@@ -227,7 +236,10 @@
                     <constraints>
                       <grid row="5" column="0" row-span="1" col-span="4" vsize-policy="3" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                     </constraints>
-                    <properties/>
+                    <properties>
+                      <horizontalScrollBarPolicy value="31"/>
+                      <verticalScrollBarPolicy value="21"/>
+                    </properties>
                     <border type="none" title-resource-bundle="messages/FindAuthorBundle" title-key="export-find-format"/>
                     <children>
                       <component id="4e474" class="javax.swing.JTextArea" binding="findFormat">
@@ -240,12 +252,17 @@
                     <constraints>
                       <grid row="6" column="0" row-span="1" col-span="4" vsize-policy="3" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                     </constraints>
-                    <properties/>
+                    <properties>
+                      <horizontalScrollBarPolicy value="31"/>
+                      <verticalScrollBarPolicy value="21"/>
+                    </properties>
                     <border type="none" title-resource-bundle="messages/FindAuthorBundle" title-key="export-find-format-params"/>
                     <children>
                       <component id="f46a0" class="javax.swing.JTextArea" binding="findParams">
                         <constraints/>
-                        <properties/>
+                        <properties>
+                          <editable value="false"/>
+                        </properties>
                       </component>
                     </children>
                   </scrollpane>

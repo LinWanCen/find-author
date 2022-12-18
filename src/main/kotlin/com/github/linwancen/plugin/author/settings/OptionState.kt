@@ -34,18 +34,33 @@ class OptionState : PersistentStateComponent<OptionState?> {
     }
 
     companion object {
-        const val GIT_FORMAT = "\${fileNum}.(\${fileName}:\${lineNum})\t%an\t%ci\t%s"
-        const val FIND_FORMAT = ".(\${fileName}:\${lineNum})\t\${gitName}\t\${gitTime}\t\${Module}"
+        const val GIT_FORMAT = ".(\${fileName}:\${lineNum})" +
+                "\t%an" +
+                "\t%ci" +
+                "\t\${fileNum}" +
+                "\t\${fileNameS}\${.}\${methodName}" +
+                "\t\${@author}" +
+                "\t\${@1} \${@2}" +
+                "\t%s"
+        const val FIND_FORMAT = ".(\${fileName}:\${lineNum})" +
+                "\t\${gitName}" +
+                "\t\${gitTime}" +
+                "\t\${Module}" +
+                "\t\${fileNameS}\${.}\${methodName}" +
+                "\t\${@author}" +
+                "\t\${@1} \${@2}" +
+                "\t\${text}"
 
         /**
          * @see UsageGroupingRule impl
          */
         @JvmStatic
         val params = """
-            ${'$'}{filePath}    ${'$'}{fileName}     ${'$'}{lineNum}
-            ${'$'}{gitName}     ${'$'}{gitTime}      ${'$'}{gitHash}
-            ${'$'}{UsageScope}  ${'$'}{UsageType}    ${'$'}{Module}  ${'$'}{Directory} ${'$'}{File}
-            ${'$'}{Package}     ${'$'}{Class}        ${'$'}{Method}
+            ${'$'}{filePath}    ${'$'}{fileName}      ${'$'}{lineNum}  ${'$'}{fileNameS}
+            ${'$'}{gitName}     ${'$'}{gitTime}       ${'$'}{gitHash}  ${'$'}{gitModule}
+            ${'$'}{@author}     ${'$'}{@1} ${'$'}{@2} ${'$'}{@0}
+            ${'$'}{UsageScope}  ${'$'}{UsageType}     ${'$'}{Module}   ${'$'}{Directory}  ${'$'}{File}
+            ${'$'}{Package}     ${'$'}{Class}         ${'$'}{Method}   ${'$'}{methodName} ${'$'}{text} ${'$'}{.}
             ${'$'}{NonJavaFile} ${'$'}{NonCodeUsage}
             ${'$'}{SingleParentUsage}
         """.trimIndent()

@@ -1,4 +1,4 @@
-package com.github.linwancen.plugin.author.module.export
+package com.github.linwancen.plugin.author.find
 
 import com.intellij.usages.UsageInfo2UsageAdapter
 import com.intellij.usages.UsageView
@@ -8,17 +8,10 @@ import com.intellij.usages.impl.UsageViewImpl
 import java.util.function.Consumer
 import javax.swing.tree.TreeNode
 
-object ExportService {
+object ExportFind {
 
     private const val GROUPING_RULE = "GroupingRule"
     private const val DELETE_GROUPING_RULE_LEN = "GroupingRule".length - 1
-
-    @JvmStatic
-    val BLAME_MAP = mapOf(
-        "gitName" to "%an",
-        "gitTime" to "%ci",
-        "gitHash" to "%h"
-    )
 
     @JvmStatic
     fun scan(usageView: UsageView, consumer: Consumer<MutableMap<String, String>>) {
@@ -34,7 +27,7 @@ object ExportService {
         map: Map<String, String>,
         treeNode: TreeNode,
         usageView: UsageView,
-        consumer: Consumer<MutableMap<String, String>>,
+        consumer: Consumer<MutableMap<String, String>>
     ) {
         val children = treeNode.children() ?: return
         for (child in children) {
@@ -54,9 +47,16 @@ object ExportService {
                 if (info is UsageInfo2UsageAdapter) {
                     val childMap = mutableMapOf<String, String>()
                     childMap.putAll(map)
+                    childMap["Method"]?.let {
+                        childMap["methodName"] = it.substring(0, it.indexOf("("))
+                        childMap["."] = "."
+                    }
                     childMap["filePath"] = info.file.path
+                    childMap["fileNameS"] = info.file.nameWithoutExtension
                     childMap["fileName"] = info.file.name
-                    childMap["lineNum"] = (info.line + 1).toString()
+                    val lineNum = (info.line + 1).toString()
+                    childMap["lineNum"] = lineNum
+                    childMap["text"] = info.text.joinToString("").substring(lineNum.length)
                     consumer.accept(childMap)
                 }
             }

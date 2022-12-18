@@ -18,6 +18,13 @@ object GitBlame {
                 "(\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2})"
     )
 
+    @JvmStatic
+    val BLAME_MAP = mapOf(
+        "gitName" to "%an",
+        "gitTime" to "%ci",
+        "gitHash" to "%h"
+    )
+
     /**
      * git blame --ignore-rev=xxx -w -Ln,n filePath
      */
@@ -25,10 +32,13 @@ object GitBlame {
     fun info(
         gitInfo: GitInfo,
         format: String,
-        filePath: String,
-        lineNum: String,
-        ignoreRevs: MutableSet<String> = mutableSetOf(),
+        filePath: String?,
+        lineNum: String?,
+        ignoreRevs: MutableSet<String> = mutableSetOf()
     ): String {
+        if (filePath == null || lineNum == null) {
+            return format.replace(GitLog.FORMAT_KEY, "")
+        }
         val repo = GitRepos.repo(filePath, gitInfo.project) ?: return GitRepos.notInGit(format)
         val handler = GitLineHandler(gitInfo.project, repo.root, GitCommand.BLAME)
         if (gitInfo.canIgnore && ignoreRevs.isNotEmpty()) {
@@ -56,6 +66,7 @@ object GitBlame {
         var result = format.replace("%h", hash)
         result = result.replace("%an", name)
         result = result.replace("%ci", time)
+        result = result.replace("\${gitModule}", repo.root.path.substring(repo.root.path.indexOf('/') + 1))
         result = result.replace(GitLog.FORMAT_KEY, "")
         return result
     }

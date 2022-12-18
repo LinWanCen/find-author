@@ -13,7 +13,7 @@ object NameToFile {
         fileName: String,
         fileEndList: List<String>,
         searchScope: GlobalSearchScope,
-        project: Project,
+        project: Project
     ): Collection<VirtualFile> {
         var files: Collection<VirtualFile> = emptyList()
         DumbService.getInstance(project).runReadActionInSmartMode {

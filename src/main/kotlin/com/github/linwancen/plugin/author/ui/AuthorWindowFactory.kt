@@ -11,6 +11,12 @@ class AuthorWindowFactory : ToolWindowFactory {
     }
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
         val authorWindow = AuthorWindow(project, toolWindow)
+        val iterator = winMap.iterator()
+        for (entry in iterator) {
+            if (entry.key.isDisposed) {
+                iterator.remove()
+            }
+        }
         winMap[project] = authorWindow
         val contentFactory = ContentFactory.SERVICE.getInstance()
         val content = contentFactory.createContent(authorWindow.mainPanel, "", false)

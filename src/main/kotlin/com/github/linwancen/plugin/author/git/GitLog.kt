@@ -10,6 +10,7 @@ import git4idea.commands.GitLineHandler
 object GitLog {
 
     val FORMAT_KEY = Regex("%\\w+")
+    val TIME_ZONE = Regex(" [+-]\\d{4}")
 
     /**
      * ```
@@ -36,7 +37,7 @@ object GitLog {
         }
 
         handler.addParameters(filePath)
-        return gitInfo.outOrErr(handler, format)
+        return gitInfo.outOrErr(repo, handler, format)
     }
 
     @JvmStatic
@@ -62,7 +63,7 @@ object GitLog {
                 val repo = GitRepos.repo(project) ?: return FindAuthorBundle.message("not-in-git")
                 val handler = GitLineHandler(project, repo.root, GitCommand.LOG)
                 handler.addParameters("-1", "--pretty=format:$format")
-                return gitInfo.outOrErr(handler, format)
+                return gitInfo.outOrErr(repo, handler, format)
             }
         }
         value.queue()
