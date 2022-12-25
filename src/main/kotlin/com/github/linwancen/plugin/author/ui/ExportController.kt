@@ -4,7 +4,6 @@ import com.github.linwancen.plugin.author.comment.DataService
 import com.github.linwancen.plugin.author.find.ExportFind
 import com.github.linwancen.plugin.author.git.GitBlame
 import com.github.linwancen.plugin.author.git.GitInfo
-import com.github.linwancen.plugin.common.TaskTool
 import com.github.linwancen.plugin.common.text.Formats
 import com.intellij.openapi.progress.ProgressIndicator
 import com.intellij.openapi.progress.Task
@@ -23,9 +22,10 @@ object ExportController {
             // tip it
             return
         }
-        object : Task.Backgroundable(project, "Export find ${TaskTool.time()}") {
+        object : Task.Backgroundable(project, "Export find ${usageView.usagesCount}") {
             override fun run(indicator: ProgressIndicator) {
                 try {
+                    authorWindow.exportName = ExportFind.key(usageView)
                     val mapList = mutableListOf<MutableMap<String, String>>()
                     ExportFind.scan(usageView) {
                         mapList.add(it)

@@ -18,6 +18,7 @@ object NameToFile {
         var files: Collection<VirtualFile> = emptyList()
         DumbService.getInstance(project).runReadActionInSmartMode {
             for (fileEnd in fileEndList) {
+                // 212.4746.92 delete project
                 files = FilenameIndex.getVirtualFilesByName(project, "$fileName$fileEnd", searchScope)
                 if (files.isNotEmpty()) {
                     return@runReadActionInSmartMode

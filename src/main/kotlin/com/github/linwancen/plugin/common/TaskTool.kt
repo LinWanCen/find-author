@@ -45,13 +45,7 @@ class TaskTool(var indicator: ProgressIndicator, var length: Int) {
 
     companion object {
         @JvmStatic
-        fun time(): String {
-            val sdf = SimpleDateFormat("HH:mm:ss")
-            return sdf.format(Date(System.currentTimeMillis()))
-        }
-
-        @JvmStatic
-        private fun timeStr(millis: Long): String {
+        fun timeStr(millis: Long): String {
             val time = Duration.ofMillis(millis)
             val hour = if (time.toHours() > 0) "${time.toHours()}h " else ""
             val minutes = if (time.toMinutesPart() > 0) "${time.toMinutesPart()}m " else ""

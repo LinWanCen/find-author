@@ -7,8 +7,13 @@ import javax.swing.text.JTextComponent
 
 object UiUtils {
     @JvmStatic
+    fun lineCount(jTextComponent: JTextComponent): Int {
+        val str: String = jTextComponent.text.trim()
+        return str.length - str.replace("\n", "").length
+    }
+
+    @JvmStatic
     fun onChange(jTextComponent: JTextComponent, initValue: String, onChange: BiConsumer<DocumentEvent, String>) {
-        jTextComponent.text = initValue
         jTextComponent.document.addDocumentListener(object : DocumentListener {
             override fun insertUpdate(e: DocumentEvent) {
                 onChange.accept(e, jTextComponent.text)
@@ -22,5 +27,6 @@ object UiUtils {
                 onChange.accept(e, jTextComponent.text)
             }
         })
+        jTextComponent.text = initValue
     }
 }

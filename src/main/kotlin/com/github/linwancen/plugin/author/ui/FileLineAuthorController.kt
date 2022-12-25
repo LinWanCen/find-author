@@ -4,7 +4,6 @@ import com.github.linwancen.plugin.author.comment.DataService
 import com.github.linwancen.plugin.author.git.GitBlame
 import com.github.linwancen.plugin.author.git.GitInfo
 import com.github.linwancen.plugin.author.git.GitLog
-import com.github.linwancen.plugin.common.TaskTool
 import com.github.linwancen.plugin.common.file.FileLine
 import com.github.linwancen.plugin.common.text.Formats
 import com.intellij.openapi.progress.ProgressIndicator
@@ -21,7 +20,7 @@ object FileLineAuthorController {
             return
         }
         val lines = authorWindow.input.text.split("\n")
-        object : Task.Backgroundable(project, "Find author ${TaskTool.time()}") {
+        object : Task.Backgroundable(project, "Find author ${lines.size}") {
             override fun run(indicator: ProgressIndicator) {
                 try {
                     // In this for change new git version

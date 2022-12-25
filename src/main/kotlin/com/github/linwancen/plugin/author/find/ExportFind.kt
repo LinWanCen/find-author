@@ -1,17 +1,36 @@
 package com.github.linwancen.plugin.author.find
 
+import com.intellij.navigation.NavigationItem
 import com.intellij.usages.UsageInfo2UsageAdapter
 import com.intellij.usages.UsageView
 import com.intellij.usages.impl.GroupNode
 import com.intellij.usages.impl.UsageNode
 import com.intellij.usages.impl.UsageViewImpl
 import java.util.function.Consumer
+import javax.swing.tree.DefaultMutableTreeNode
 import javax.swing.tree.TreeNode
 
 object ExportFind {
 
     private const val GROUPING_RULE = "GroupingRule"
     private const val DELETE_GROUPING_RULE_LEN = "GroupingRule".length - 1
+
+    @JvmStatic
+    fun key(usageView: UsageView): String {
+        if (usageView is UsageViewImpl) {
+            val firstChild = usageView.root.firstChild
+            if (firstChild is DefaultMutableTreeNode) {
+                val treeNode = firstChild.firstChild
+                if (treeNode is DefaultMutableTreeNode) {
+                    val userObject = treeNode.userObject
+                    if (userObject is NavigationItem) {
+                        userObject.name?.let { return it }
+                    }
+                }
+            }
+        }
+        return "find-author"
+    }
 
     @JvmStatic
     fun scan(usageView: UsageView, consumer: Consumer<MutableMap<String, String>>) {
@@ -34,10 +53,16 @@ object ExportFind {
             if (child is GroupNode) {
                 val childMap = mutableMapOf<String, String>()
                 childMap.putAll(map)
-                var simpleName = child.group.javaClass.enclosingClass.simpleName
+                val groupClass = child.group.javaClass
+                // PsiNamedElementUsageGroupBase
+                var simpleName = groupClass.enclosingClass?.simpleName ?: groupClass.simpleName
+                if (groupClass.enclosingClass == null) {
+                    System.err.println(groupClass.name)
+                }
                 if (simpleName.endsWith(GROUPING_RULE)) {
                     simpleName = simpleName.substring(0, simpleName.lastIndex - DELETE_GROUPING_RULE_LEN)
                 }
+                // 212.4746.92 getPresentableGroupText()
                 val text = child.group.getText(usageView)
                 childMap[simpleName] = text
                 childMap["${(childMap.size + 1) / 2}"] = text

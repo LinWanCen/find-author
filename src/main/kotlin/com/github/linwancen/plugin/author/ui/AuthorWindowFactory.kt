@@ -18,6 +18,7 @@ class AuthorWindowFactory : ToolWindowFactory {
             }
         }
         winMap[project] = authorWindow
+        // 222.2680.4 delete SERVICE
         val contentFactory = ContentFactory.SERVICE.getInstance()
         val content = contentFactory.createContent(authorWindow.mainPanel, "", false)
         toolWindow.contentManager.addContent(content)

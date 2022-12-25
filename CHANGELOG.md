@@ -4,6 +4,7 @@
 
 ## [1.0.0]
 
+- 1.06 Export output to file
 - 1.05 Find authors from comment
 - 1.04 export find window as tsv table with authors
 - 1.03 Option for file ext, default not skip or .java
@@ -13,6 +14,7 @@
 
 # 中文更新日志
 
+- 1.06 导出输出到文件
 - 1.05 从注释获取作者
 - 1.04 以带作者的表格形式导出搜索窗口
 - 1.03 支持自定义省略的文件末尾拓展名，默认不省略或.java

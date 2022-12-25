@@ -6,6 +6,7 @@ import com.github.linwancen.plugin.author.settings.IgnoreState;
 import com.github.linwancen.plugin.author.settings.InputState;
 import com.github.linwancen.plugin.author.settings.OptionState;
 import com.github.linwancen.plugin.author.settings.State;
+import com.github.linwancen.plugin.common.TaskTool;
 import com.github.linwancen.plugin.common.ui.UiUtils;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
@@ -19,6 +20,8 @@ import java.awt.event.FocusEvent;
 public class AuthorWindow {
     Project project;
     ToolWindow toolWindow;
+    String exportName = "find-author";
+    long startTime = 0;
 
     public AuthorWindow(@NotNull Project project, ToolWindow toolWindow) {
         this.project = project;
@@ -26,11 +29,16 @@ public class AuthorWindow {
         State state = new State(project);
 
         gitAuthor.addActionListener(e -> FileLineAuthorController.getAuthor(this));
+        export.addActionListener(e -> ExportOutputToTsvController.export(project, exportName, output.getText()));
 
         // leave user and ignore msg/rev
         InputState inputState = state.getInput();
         IgnoreState ignoreState = state.getIgnore();
-        UiUtils.onChange(input, inputState.getInput(), (e, s) -> inputState.setInput(s));
+        UiUtils.onChange(input, inputState.getInput(), (e, s) -> {
+            int lineCount = UiUtils.lineCount(input);
+            input.setToolTipText(String.valueOf(lineCount));
+            inputState.setInput(s);
+        });
         UiUtils.onChange(leaveUser, ignoreState.getUser(), (e, s) -> ignoreState.setUser(s));
         UiUtils.onChange(ignoreMsg, ignoreState.getMsg(), (e, s) -> ignoreState.setMsg(s));
         UiUtils.onChange(ignoreRev, ignoreState.getRev(), (e, s) -> ignoreState.setRev(s));
@@ -69,16 +77,28 @@ public class AuthorWindow {
             return true;
         }
         gitAuthor.setEnabled(false);
+        export.setEnabled(false);
+        exportName = "find-author";
         output.setText("");
+        this.output.setToolTipText(null);
+        startTime = System.currentTimeMillis();
         return false;
     }
 
     public void finallyForRun() {
+        long useTime = System.currentTimeMillis() - startTime;
+        int size = UiUtils.lineCount(output);
+        String tip = TaskTool.timeStr(useTime) + " " + size;
+        this.output.setToolTipText(tip);
         gitAuthor.setEnabled(true);
+        export.setEnabled(true);
+        this.output.grabFocus();
+        this.output.selectAll();
     }
 
     JPanel mainPanel;
     JButton gitAuthor;
+    private JButton export;
 
     JTabbedPane tab;
 
